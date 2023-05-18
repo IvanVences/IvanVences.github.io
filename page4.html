@@ -1,0 +1,114 @@
+<html>
+<head>
+    <title>Ivan's Home</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #game-container {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #pong {
+            position: relative;
+            width: 20px;
+            height: 80px;
+            background-color: #000;
+        }
+
+        #ball {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" style="text-decoration:none;">  
+        Home
+    </a>
+
+    <a href="page2.html" style="text-decoration:none;">  
+        Page 2
+    </a>
+
+    <a href="page3.html" style="text-decoration:none;">  
+        Page 3
+    </a>
+
+    <a href="page4.html" style="text-decoration: none;">
+        Page 4
+    </a>
+        
+    <h1 style="font-size: 40px">Homepage 3</h1> 
+    <br>
+    <h2>My Favorite Color</h2>
+    <ul>
+        <li>I like blue</li>
+    </ul>
+    
+    <div id="game-container">
+        <div id="pong"></div>
+        <div id="ball"></div>
+    </div>
+
+    <script>
+        // Variables
+        var pong = document.getElementById('pong');
+        var pongTop = 0;
+        var pongSpeed = 10;
+
+        var ball = document.getElementById('ball');
+        var ballTop = 50;
+        var ballLeft = 50;
+        var ballSpeedX = 2;
+        var ballSpeedY = 2;
+
+        // Function to update ball position
+        function updateBallPosition() {
+            ballTop += ballSpeedY;
+            ballLeft += ballSpeedX;
+            ball.style.top = ballTop + '%';
+            ball.style.left = ballLeft + '%';
+
+            // Check for collision with walls
+            if (ballTop <= 0 || ballTop >= 100) {
+                ballSpeedY *= -1;
+            }
+
+            if (ballLeft <= 0 || ballLeft >= 100) {
+                ballSpeedX *= -1;
+            }
+        }
+
+        // Event listener for key press
+        document.addEventListener('keydown', function (event) {
+            if (event.code === 'ArrowUp') {
+                pongTop -= pongSpeed;
+            } else if (event.code === 'ArrowDown') {
+                pongTop += pongSpeed;
+            }
+            pong.style.top = pongTop + 'px';
+        });
+
+        // Game loop
+        setInterval(updateBallPosition, 20);
+    </script>
+</body>
+</html>
